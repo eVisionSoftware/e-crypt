@@ -1,0 +1,19 @@
+<?xml version="1.0" encoding="utf-8"?>
+<Project xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
+  <PropertyGroup>
+    <MSBuildAllProjects>$(MSBuildAllProjects);$(MSBuildThisFileFullPath)</MSBuildAllProjects>
+    <HasSharedItems>true</HasSharedItems>
+    <SharedGUID>b5b299c1-3e49-4871-9518-e7b593e61d1a</SharedGUID>
+  </PropertyGroup>
+  <PropertyGroup Label="Configuration">
+    <Import_RootNamespace>eVision.Encryption</Import_RootNamespace>
+  </PropertyGroup>
+  <ItemGroup>
+    <Compile Include="$(MSBuildThisFileDirectory)Helpers\StringExtensions.cs" />
+    <Compile Include="$(MSBuildThisFileDirectory)Helpers\TempDirectory.cs" />
+    <Compile Include="$(MSBuildThisFileDirectory)PgpDecryptor.cs" />
+    <Compile Include="$(MSBuildThisFileDirectory)Helpers\Contract.cs" />
+    <Compile Include="$(MSBuildThisFileDirectory)PgpEncryptor.cs" />
+    <Compile Include="$(MSBuildThisFileDirectory)PgpKeyGenerator.cs" />
+  </ItemGroup>
+</Project>
