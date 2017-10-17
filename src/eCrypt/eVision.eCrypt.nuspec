@@ -1,0 +1,24 @@
+<?xml version="1.0"?>
+<package xmlns="http://schemas.microsoft.com/packaging/2010/07/nuspec.xsd">
+  <metadata>
+    <id>eVision.eCrypt</id>
+    <version>0.0.0.0</version>
+    <title>eVision.eCrypt</title>
+    <authors>Sergii Iarovyi, Yevhen Tsybulskyi</authors>
+    <owners>Sergii Iarovyi</owners>
+    <projectUrl>https://github.com/eVision-oss/e-crypt</projectUrl>
+    <requireLicenseAcceptance>false</requireLicenseAcceptance>
+    <description>An console application that helps to encrypt package with public tool into self-executable file with private key protection</description>
+    <releaseNotes>
+    </releaseNotes>
+    <copyright>Copyright 2016</copyright>
+    <tags></tags>
+    <dependencies>
+    </dependencies>
+  </metadata>
+  <files>
+    <file src="eVision.eCrypt.exe" target="lib\net45" />
+    <file src="merged/eVision.KeyGenerator.exe" target="lib\net45" />
+  </files>
+</package>
+

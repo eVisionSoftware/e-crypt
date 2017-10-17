@@ -1,0 +1,23 @@
+<?xml version="1.0"?>
+<package xmlns="http://schemas.microsoft.com/packaging/2010/07/nuspec.xsd">
+  <metadata>
+    <id>Cake.eCrypt</id>
+    <version>0.4.0.0</version>
+    <title>Cake eCrypt</title>
+    <authors>Koen Willemse</authors>
+    <owners>Koen Willemse</owners>
+    <projectUrl>http://github.com/eVision-oss/e-crypt</projectUrl>
+    <requireLicenseAcceptance>false</requireLicenseAcceptance>
+    <description>A cake wrapper for the eVision eCrypt tool that helps to encrypt package into a self-executable file with private key protection</description>
+    <releaseNotes></releaseNotes>
+    <copyright>Copyright 2017</copyright>
+    <tags></tags>
+    <dependencies>
+    </dependencies>
+  </metadata>
+  <files>
+    <file src="eVision.eCrypt.exe" target="lib\net45" />
+    <file src="Cake.eCrypt.exe" target="lib\net45" />
+  </files>
+</package>
+
