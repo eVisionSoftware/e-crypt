@@ -1,0 +1,16 @@
+version: 1.0.{build}
+environment:
+  NugetApiKey:
+    secure: TODO_ADD_NUGET_KEY
+build_script:
+- ps: ./build.ps1 -target Package
+artifacts:
+- path: ./build_output/artifacts/*.nupkg
+- path: ./build_output/artifacts/*.exe
+- path: ./build_output/artifacts/*.pdb
+deploy:
+- provider: NuGet
+  api_key:
+    secure: TODO_ADD_NUGET_KEY
+  on:
+    appveyor_repo_tag: true

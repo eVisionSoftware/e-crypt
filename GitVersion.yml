@@ -1,0 +1,24 @@
+assembly-versioning-scheme: MajorMinorPatch
+next-version: 0.0.1
+mode: ContinuousDelivery
+branches: 
+  master:
+    tag:
+    increment: Patch
+    prevent-increment-of-merged-branch-version: true
+  develop:
+    tag: unstable
+    increment: Minor
+  (pull|pull\-requests|pr)[/-]:
+    tag: PullRequest
+    increment: Patch
+    tag-number-pattern: '[/-](?<number>\d+)[-/]'
+    track-merge-target: true
+  releases?[/-]:
+    track-merge-target: true
+  features?[/-]:
+    track-merge-target: true
+  hotfix(es)?[/-]:
+    track-merge-target: true
+  support[/-]:
+    track-merge-target: true
