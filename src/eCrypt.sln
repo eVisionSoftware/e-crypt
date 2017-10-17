@@ -1,0 +1,71 @@
+Microsoft Visual Studio Solution File, Format Version 12.00
+# Visual Studio 15
+VisualStudioVersion = 15.0.26228.9
+MinimumVisualStudioVersion = 10.0.40219.1
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "eCrypt.KeyGenerator", "eCrypt.KeyGenerator\eCrypt.KeyGenerator.csproj", "{6ECDEE53-076C-491C-AE04-CE26DBAE65B3}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "eCrypt.Decryption.UI", "eCrypt.Decryption.UI\eCrypt.Decryption.UI.csproj", "{BECF0F4F-D60E-48E3-AEC2-9FAFA85D42D6}"
+EndProject
+Project("{D954291E-2A0B-460D-934E-DC6B0785DB48}") = "eCrypt.Encryption", "eCrypt.Encryption\eCrypt.Encryption.shproj", "{B5B299C1-3E49-4871-9518-E7B593E61D1A}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "eCrypt", "eCrypt\eCrypt.csproj", "{529D54CF-AF8B-4FB8-BAA1-FBAD412C4A8B}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "eCrypt.Encryption.Tests", "eCrypt.Encryption.Tests\eCrypt.Encryption.Tests.csproj", "{4F542138-3E03-4229-9367-8052D498A67F}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "eCrypt.Tests", "eCrypt.Tests\eCrypt.Tests.csproj", "{3EC04540-3D8B-48B4-9850-3224CFD0293E}"
+EndProject
+Project("{D954291E-2A0B-460D-934E-DC6B0785DB48}") = "eCrypt.Common", "eCrypt.Common\eCrypt.Common.shproj", "{4EC9A0AA-5A9A-4D03-A2D9-9F54AB715FFE}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Cake.eCrypt", "Cake.eCrypt\Cake.eCrypt.csproj", "{BD2B1B7A-9FAC-4E95-9516-71BF4F68F3B7}"
+EndProject
+Global
+	GlobalSection(SharedMSBuildProjectFiles) = preSolution
+		eCrypt.Common\eCrypt.Common.projitems*{3ec04540-3d8b-48b4-9850-3224cfd0293e}*SharedItemsImports = 4
+		eCrypt.Common\eCrypt.Common.projitems*{4ec9a0aa-5a9a-4d03-a2d9-9f54ab715ffe}*SharedItemsImports = 13
+		eCrypt.Common\eCrypt.Common.projitems*{4f542138-3e03-4229-9367-8052d498a67f}*SharedItemsImports = 4
+		eCrypt.Encryption\eCrypt.Encryption.projitems*{4f542138-3e03-4229-9367-8052d498a67f}*SharedItemsImports = 4
+		eCrypt.Common\eCrypt.Common.projitems*{529d54cf-af8b-4fb8-baa1-fbad412c4a8b}*SharedItemsImports = 4
+		eCrypt.Encryption\eCrypt.Encryption.projitems*{529d54cf-af8b-4fb8-baa1-fbad412c4a8b}*SharedItemsImports = 4
+		eCrypt.Common\eCrypt.Common.projitems*{6ecdee53-076c-491c-ae04-ce26dbae65b3}*SharedItemsImports = 4
+		eCrypt.Encryption\eCrypt.Encryption.projitems*{6ecdee53-076c-491c-ae04-ce26dbae65b3}*SharedItemsImports = 4
+		eCrypt.Encryption\eCrypt.Encryption.projitems*{b5b299c1-3e49-4871-9518-e7b593e61d1a}*SharedItemsImports = 13
+		eCrypt.Common\eCrypt.Common.projitems*{becf0f4f-d60e-48e3-aec2-9fafa85d42d6}*SharedItemsImports = 4
+		eCrypt.Encryption\eCrypt.Encryption.projitems*{becf0f4f-d60e-48e3-aec2-9fafa85d42d6}*SharedItemsImports = 4
+	EndGlobalSection
+	GlobalSection(SolutionConfigurationPlatforms) = preSolution
+		Debug|Any CPU = Debug|Any CPU
+		Release|Any CPU = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(ProjectConfigurationPlatforms) = postSolution
+		{6ECDEE53-076C-491C-AE04-CE26DBAE65B3}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{6ECDEE53-076C-491C-AE04-CE26DBAE65B3}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{6ECDEE53-076C-491C-AE04-CE26DBAE65B3}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{6ECDEE53-076C-491C-AE04-CE26DBAE65B3}.Release|Any CPU.Build.0 = Release|Any CPU
+		{BECF0F4F-D60E-48E3-AEC2-9FAFA85D42D6}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{BECF0F4F-D60E-48E3-AEC2-9FAFA85D42D6}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{BECF0F4F-D60E-48E3-AEC2-9FAFA85D42D6}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{BECF0F4F-D60E-48E3-AEC2-9FAFA85D42D6}.Release|Any CPU.Build.0 = Release|Any CPU
+		{529D54CF-AF8B-4FB8-BAA1-FBAD412C4A8B}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{529D54CF-AF8B-4FB8-BAA1-FBAD412C4A8B}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{529D54CF-AF8B-4FB8-BAA1-FBAD412C4A8B}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{529D54CF-AF8B-4FB8-BAA1-FBAD412C4A8B}.Release|Any CPU.Build.0 = Release|Any CPU
+		{4F542138-3E03-4229-9367-8052D498A67F}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{4F542138-3E03-4229-9367-8052D498A67F}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{4F542138-3E03-4229-9367-8052D498A67F}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{4F542138-3E03-4229-9367-8052D498A67F}.Release|Any CPU.Build.0 = Release|Any CPU
+		{3EC04540-3D8B-48B4-9850-3224CFD0293E}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{3EC04540-3D8B-48B4-9850-3224CFD0293E}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{3EC04540-3D8B-48B4-9850-3224CFD0293E}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{3EC04540-3D8B-48B4-9850-3224CFD0293E}.Release|Any CPU.Build.0 = Release|Any CPU
+		{BD2B1B7A-9FAC-4E95-9516-71BF4F68F3B7}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{BD2B1B7A-9FAC-4E95-9516-71BF4F68F3B7}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{BD2B1B7A-9FAC-4E95-9516-71BF4F68F3B7}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{BD2B1B7A-9FAC-4E95-9516-71BF4F68F3B7}.Release|Any CPU.Build.0 = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(SolutionProperties) = preSolution
+		HideSolutionNode = FALSE
+	EndGlobalSection
+	GlobalSection(ExtensibilityGlobals) = postSolution
+		SolutionGuid = {9B714B88-653F-4C20-9647-59C01C240755}
+	EndGlobalSection
+EndGlobal
