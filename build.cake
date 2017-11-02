@@ -42,7 +42,16 @@ Task("Restore-NuGet-Packages")
 Task("Update-Assembly-Info")
     .Does(() =>
 {
-    GitVersion version = GitVersion(new GitVersionSettings { UpdateAssemblyInfo = true, OutputType = GitVersionOutput.BuildServer });
+	if (!BuildSystem.IsLocalBuild) 
+    {
+        GitVersion(new GitVersionSettings {
+            UpdateAssemblyInfo = true,
+            OutputType = GitVersionOutput.BuildServer
+        });
+    }
+	
+    GitVersion version = GitVersion(new GitVersionSettings { UpdateAssemblyInfo = false, OutputType = GitVersionOutput.Json });
+	Information("Version: " + version.NuGetVersion);
 });
 
 Task("Build")
