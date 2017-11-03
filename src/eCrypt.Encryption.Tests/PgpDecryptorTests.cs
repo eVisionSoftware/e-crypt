@@ -29,7 +29,7 @@
                     PgpDecryptor.Decrypt(encryptedStream, privateKeyStream, TestKeys.Password, decryptedFilePath);
                 }
 
-                decryptedFilePath.Should().BePathToFileWithContent(content);
+                decryptedFilePath.Should().BePathToFileWithContent(content+"test");
             }
         }
     }
