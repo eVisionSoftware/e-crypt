@@ -13,6 +13,7 @@
 
     public class SelfExtractorCompiler : IDisposable
     {
+        private const string SystemReflectionNamespace = nameof(System) + "." + nameof(System.Reflection);
         private const string SourcesFolder = "SelfExtractorSources";
         private const string Resources = "Resources";
         private const string CodeExtension = "cs";
@@ -31,7 +32,7 @@
             _transformation = transformation;
         }
 
-        public string Compile(string outputAssemblyName)
+        public string Compile(string outputAssemblyName, string fileVersion = null)
         {
             ProjectInfo projectInfo = GetProjectInfo();
 
@@ -44,7 +45,9 @@
 
             CompilerResults result = new AssemblyCompiler()
                 .Reference(references)
+                .Reference(SystemReflectionNamespace)
                 .WithCode(SourceCode)
+                .WithCode(GenerateVersionFile(fileVersion))
                 .WithIcon(_resourcesDir.Files.First(r => r.EndsWith(IconExtension)))
                 .WithName(outputAssemblyName)
                 .WithEmbeddedResource(_transformedFiles.Cast<string>())
@@ -60,6 +63,17 @@
         {
             _filePathsToInclude.AddRange(filePathsToInclude);
             return this;
+        }
+
+        private static string GenerateVersionFile(string fileVersion)
+        {
+            string version = Assembly.GetExecutingAssembly().GetName().Version.ToString();
+            return $@"
+                using {SystemReflectionNamespace};
+                [assembly: AssemblyVersion(""{version}"")]
+                [assembly: AssemblyFileVersion(""{(string.IsNullOrEmpty(fileVersion) ? version : fileVersion)}"")]
+                [assembly: AssemblyInformationalVersion(""{version}"")]
+            ";
         }
 
         private static IEnumerable<string> ResourceNames => Assembly.GetExecutingAssembly()

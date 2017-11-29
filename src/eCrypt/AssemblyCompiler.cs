@@ -47,13 +47,13 @@
             return this;
         }
 
-        public AssemblyCompiler Reference(IEnumerable<string> references)
+        public AssemblyCompiler Reference(params string[] references)
         {
             _references.AddRange(references);
             return this;
         }
 
-        public AssemblyCompiler WithCode(IEnumerable<string> sourceCode)
+        public AssemblyCompiler WithCode(params string[] sourceCode)
         {
             _sourceCode.AddRange(sourceCode);
             return this;
