@@ -11,7 +11,7 @@
 
     internal class Options
     {
-        [Option('o', "output-path", Required = false, DefaultValue = "eVision.exe", HelpText = "Full path of generated executable including exe file extension")]
+        [Option('o', "output-path", Required = false, DefaultValue = "./eVision.exe", HelpText = "Full path of generated executable including exe file extension")]
         public string OutputAssemblyPath { get; set; }
 
         [Option('k', "key-path", Required = false, HelpText = "Path to file containing public key for encryption")]
@@ -69,7 +69,7 @@
 
             if (PublicKeyPath != null && !File.Exists(PublicKeyPath))
             {
-                errors.Add("Public key file doesn't exists");
+                errors.Add($"Public key file '{PublicKeyPath}' doesn't exists");
             }
 
             if (PublicKeyPath == null && PublicKey == null)
@@ -84,19 +84,19 @@
 
             if (EncryptionTargetPath != null && !PathExists(EncryptionTargetPath))
             {
-                errors.Add("Target doesn't exists");
+                errors.Add($"Target '{EncryptionTargetPath}' doesn't exists");
             }
 
             if (OutputAssemblyPath != null)
             {
                 if (!Directory.Exists(Path.GetDirectoryName(OutputAssemblyPath) ?? ""))
                 {
-                    errors.Add("Output directory doesn't exist");
+                    errors.Add($"Output directory '{OutputAssemblyPath}' doesn't exist");
                 }
 
                 if (!OutputAssemblyPath.ToLowerInvariant().EndsWith(".exe"))
                 {
-                    errors.Add("Output assembly path should point to executable with extension 'exe'");
+                    errors.Add($"Output assembly path `{OutputAssemblyPath}` should point to executable with extension 'exe'");
                 }
             }
 
