@@ -6,6 +6,7 @@
     using System.IO;
     using System.Linq;
     using System.Reflection;
+    using System.Text.RegularExpressions;
     using Helpers.Extensions;
     using Transformations;
     using Encryption.Helpers;
@@ -27,6 +28,10 @@
         private readonly TempDirectory _resourcesDir = TempDirectory.InBaseDirectory();
         private readonly IFileTransformation _transformation;
 
+        private readonly Regex ReplaceAssemblyVersionRegex = CreateReplaceAttrValueRegex<AssemblyVersionAttribute>();
+        private readonly Regex ReplaceFileVersionRegex = CreateReplaceAttrValueRegex<AssemblyFileVersionAttribute>();
+        private readonly Regex ReplaceInformVersionRegex = CreateReplaceAttrValueRegex<AssemblyInformationalVersionAttribute>();
+
         public SelfExtractorCompiler(IFileTransformation transformation)
         {
             _transformation = transformation;
@@ -46,8 +51,7 @@
             CompilerResults result = new AssemblyCompiler()
                 .Reference(references)
                 .Reference(SystemReflectionNamespace)
-                .WithCode(SourceCode)
-                .WithCode(GenerateVersionFile(fileVersion))
+                .WithCode(GetSourceCode(fileVersion))
                 .WithIcon(_resourcesDir.Files.First(r => r.EndsWith(IconExtension)))
                 .WithName(outputAssemblyName)
                 .WithEmbeddedResource(_transformedFiles.Cast<string>())
@@ -65,25 +69,31 @@
             return this;
         }
 
-        private static string GenerateVersionFile(string fileVersion)
-        {
-            string version = Assembly.GetExecutingAssembly().GetName().Version.ToString();
-            return $@"
-                using {SystemReflectionNamespace};
-                [assembly: AssemblyVersion(""{version}"")]
-                [assembly: AssemblyFileVersion(""{(string.IsNullOrEmpty(fileVersion) ? version : fileVersion)}"")]
-                [assembly: AssemblyInformationalVersion(""{version}"")]
-            ";
-        }
-
         private static IEnumerable<string> ResourceNames => Assembly.GetExecutingAssembly()
             .GetManifestResourceNames()
             .Where(name => name.StartsWith(AllResourcePrefix));
 
-        private static string[] SourceCode => ResourceNames
-            .Where(name => name.EndsWith(CodeExtension))
-            .Select(name => Assembly.GetExecutingAssembly().GetStringResource(name))
-            .ToArray();
+        private string[] GetSourceCode(string fileVersion)
+        {
+            string version = Assembly.GetExecutingAssembly().GetName().Version.ToString();
+
+            return ResourceNames
+                .Where(name => name.EndsWith(CodeExtension))
+                .Select(name => Assembly.GetExecutingAssembly().GetStringResource(name))
+                .Select(source => ReplaceVersion(source, version, fileVersion))
+                .ToArray();
+        }
+
+        private string ReplaceVersion(string code, string version, string fileVersion)
+        {
+            code = ReplaceAssemblyVersionRegex.Replace(code, version);
+            code = ReplaceFileVersionRegex.Replace(code, string.IsNullOrEmpty(fileVersion) ? version : fileVersion);
+            code = ReplaceInformVersionRegex.Replace(code, version);
+            return code;
+        }
+
+        private static Regex CreateReplaceAttrValueRegex<TAttr>() where TAttr : Attribute =>
+            new Regex($@"(?<=\[assembly:\s{typeof(TAttr).Name.TrimEnd("Attribute")}\("").*?(?=""\)\s*])");
 
         private static ProjectInfo GetProjectInfo()
         {
