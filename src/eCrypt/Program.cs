@@ -44,7 +44,7 @@
                     using (var compiler = new SelfExtractorCompiler(new EncryptFileTransformation(options.PublicKey))
                         .IncludingFiles(targetFilePath))
                     {
-                        string path = compiler.Compile(options.OutputAssemblyPath);
+                        string path = compiler.Compile(options.OutputAssemblyPath, options.ContentVersion);
 
                         Logger.WriteLine($"Self extractable executable was generated at {path} using key {options.PublicKey}");
                     }

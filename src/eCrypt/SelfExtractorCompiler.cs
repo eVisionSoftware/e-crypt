@@ -6,6 +6,7 @@
     using System.IO;
     using System.Linq;
     using System.Reflection;
+    using System.Text.RegularExpressions;
     using Helpers.Extensions;
     using Transformations;
     using Encryption.Helpers;
@@ -13,6 +14,7 @@
 
     public class SelfExtractorCompiler : IDisposable
     {
+        private const string SystemReflectionNamespace = nameof(System) + "." + nameof(System.Reflection);
         private const string SourcesFolder = "SelfExtractorSources";
         private const string Resources = "Resources";
         private const string CodeExtension = "cs";
@@ -26,12 +28,16 @@
         private readonly TempDirectory _resourcesDir = TempDirectory.InBaseDirectory();
         private readonly IFileTransformation _transformation;
 
+        private readonly Regex ReplaceAssemblyVersionRegex = CreateReplaceAttrValueRegex<AssemblyVersionAttribute>();
+        private readonly Regex ReplaceFileVersionRegex = CreateReplaceAttrValueRegex<AssemblyFileVersionAttribute>();
+        private readonly Regex ReplaceInformVersionRegex = CreateReplaceAttrValueRegex<AssemblyInformationalVersionAttribute>();
+
         public SelfExtractorCompiler(IFileTransformation transformation)
         {
             _transformation = transformation;
         }
 
-        public string Compile(string outputAssemblyName)
+        public string Compile(string outputAssemblyName, string fileVersion = null)
         {
             ProjectInfo projectInfo = GetProjectInfo();
 
@@ -44,7 +50,8 @@
 
             CompilerResults result = new AssemblyCompiler()
                 .Reference(references)
-                .WithCode(SourceCode)
+                .Reference(SystemReflectionNamespace)
+                .WithCode(GetSourceCode(fileVersion))
                 .WithIcon(_resourcesDir.Files.First(r => r.EndsWith(IconExtension)))
                 .WithName(outputAssemblyName)
                 .WithEmbeddedResource(_transformedFiles.Cast<string>())
@@ -66,10 +73,27 @@
             .GetManifestResourceNames()
             .Where(name => name.StartsWith(AllResourcePrefix));
 
-        private static string[] SourceCode => ResourceNames
-            .Where(name => name.EndsWith(CodeExtension))
-            .Select(name => Assembly.GetExecutingAssembly().GetStringResource(name))
-            .ToArray();
+        private string[] GetSourceCode(string fileVersion)
+        {
+            string version = Assembly.GetExecutingAssembly().GetName().Version.ToString();
+
+            return ResourceNames
+                .Where(name => name.EndsWith(CodeExtension))
+                .Select(name => Assembly.GetExecutingAssembly().GetStringResource(name))
+                .Select(source => ReplaceVersion(source, version, fileVersion))
+                .ToArray();
+        }
+
+        private string ReplaceVersion(string code, string version, string fileVersion)
+        {
+            code = ReplaceAssemblyVersionRegex.Replace(code, version);
+            code = ReplaceFileVersionRegex.Replace(code, string.IsNullOrEmpty(fileVersion) ? version : fileVersion);
+            code = ReplaceInformVersionRegex.Replace(code, version);
+            return code;
+        }
+
+        private static Regex CreateReplaceAttrValueRegex<TAttr>() where TAttr : Attribute =>
+            new Regex($@"(?<=\[assembly:\s{typeof(TAttr).Name.TrimEnd("Attribute")}\("").*?(?=""\)\s*])");
 
         private static ProjectInfo GetProjectInfo()
         {

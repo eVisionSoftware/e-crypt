@@ -28,7 +28,7 @@ Public and private key can be generated using UI tool. Pulic key is used for enc
 Example:
 You can create self-extractable encrypted package ("MySelfExtractablePackage.exe") using public key ("publick-key.asc") and package ("package-1.0.0.zip").
 
-`...eCrypt.exe --output-path=C:\Destination\MySelfExtractablePackage.exe --key-path=C:\Keys\publick-key.asc --target=C:\SomePackage\package-1.0.0.zip`
+`...eCrypt.exe --output-path=C:\Destination\MySelfExtractablePackage.exe --key-path=C:\Keys\publick-key.asc --target=C:\SomePackage\package-1.0.0.zip` --content-version="7.7.7.7"
 
 
 Self extractor has following interface:

@@ -11,7 +11,7 @@
 
     internal class Options
     {
-        [Option('o', "output-path", Required = false, DefaultValue = "eVision.exe", HelpText = "Full path of generated executable including exe file extension")]
+        [Option('o', "output-path", Required = false, DefaultValue = "./eVision.exe", HelpText = "Full path of generated executable including exe file extension")]
         public string OutputAssemblyPath { get; set; }
 
         [Option('k', "key-path", Required = false, HelpText = "Path to file containing public key for encryption")]
@@ -22,6 +22,9 @@
 
         [Option('t', "target", Required = true, HelpText = "Folder of file that should be encrypted and embedded into generated executable")]
         public string EncryptionTargetPath { get; set; }
+
+        [Option('v', "content-version", Required = false, HelpText = "Version of the content to be encrypted. If provided it will be used for 'file version' property of generated executable")]
+        public string ContentVersion { get; set; }
 
         [ParserState]
         public IParserState LastParserState { get; set; }
@@ -66,7 +69,7 @@
 
             if (PublicKeyPath != null && !File.Exists(PublicKeyPath))
             {
-                errors.Add("Public key file doesn't exists");
+                errors.Add($"Public key file '{PublicKeyPath}' doesn't exists");
             }
 
             if (PublicKeyPath == null && PublicKey == null)
@@ -81,20 +84,25 @@
 
             if (EncryptionTargetPath != null && !PathExists(EncryptionTargetPath))
             {
-                errors.Add("Target doesn't exists");
+                errors.Add($"Target '{EncryptionTargetPath}' doesn't exists");
             }
 
             if (OutputAssemblyPath != null)
             {
                 if (!Directory.Exists(Path.GetDirectoryName(OutputAssemblyPath) ?? ""))
                 {
-                    errors.Add("Output directory doesn't exist");
+                    errors.Add($"Output directory '{OutputAssemblyPath}' doesn't exist");
                 }
 
                 if (!OutputAssemblyPath.ToLowerInvariant().EndsWith(".exe"))
                 {
-                    errors.Add("Output assembly path should point to executable with extension 'exe'");
+                    errors.Add($"Output assembly path `{OutputAssemblyPath}` should point to executable with extension 'exe'");
                 }
+            }
+
+            if (ContentVersion != null && !Regex.IsMatch(ContentVersion, @"^(\d\.){3}\d$"))
+            {
+                errors.Add("Content version parameter should be in '1.1.1.1' format");
             }
 
             return errors.Any() ? string.Join(Environment.NewLine, errors) : null;
@@ -120,6 +128,9 @@ Generate self extractable executable including encrypted target directory using 
 Example 2:
 Generate self extractable executable including encrypted target file using public PGP key file.
 ... --output-path=C:\Destination\eVision.exe --key-path=""C:\Keys\public key.asc"" --target=C:\SourcePackage\package-1.0.0.zip
+Example 3:
+Generate self extractable executable and providing content version.
+... --output-path=C:\Destination\eVision.exe --key-path=""C:\Keys\public key.asc"" --target=C:\SourcePackage\package-1.0.0.zip --content-version=""7.7.7.7""
 ");
                 helpText.AddPostOptionsLine($"{Environment.NewLine}");
             });
