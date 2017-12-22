@@ -34,6 +34,7 @@
                 sourcePackageDirectory.CreateTextFile("file.txt", encryptedContent);
                 files.AddFile("decryption.log");
 
+                //test
                 ProcessResult encryptionResult = await new eCryptRunner()
                     .RunAsync(selfExtractorPath, Keys.PublicKeyPath, sourcePackageDirectory.Path);
                 ProcessResult decryptionResult = await new SelfExtractorRunner(selfExtractorPath)
