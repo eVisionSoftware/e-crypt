@@ -1,7 +1,7 @@
 version: 1.0.{build}
 environment:
   NugetApiKey:
-    secure: TODO_ADD_NUGET_KEY
+    secure: GCB6CT824nBA2Mw5JiBQ10Pks9Kj7uYVypP5j+LkxKgCpFmkMmuP++rGDkJ2a9/0
 build_script:
 - ps: ./build.ps1 -target Package
 artifacts:
@@ -11,6 +11,6 @@ artifacts:
 deploy:
 - provider: NuGet
   api_key:
-    secure: TODO_ADD_NUGET_KEY
+    secure: GCB6CT824nBA2Mw5JiBQ10Pks9Kj7uYVypP5j+LkxKgCpFmkMmuP++rGDkJ2a9/0
   on:
     appveyor_repo_tag: true
