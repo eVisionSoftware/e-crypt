@@ -1,5 +1,8 @@
 eCrypt
 =============
+[![NuGet](https://img.shields.io/nuget/v/eVision.eCrypt.svg)](https://www.nuget.org/packages/eVision.eCrypt/)
+[![Appveyor](https://ci.appveyor.com/api/projects/status/oatxw7wggrf44jon/branch/master?svg=true)](https://ci.appveyor.com/project/eVision-OSS/e-crypt/build/)
+
 eCrypt is command line tool for creation of self-extractable encrypted package as executable file.
 Also it contains application with user interface that allows to generate public and private keys.
 
