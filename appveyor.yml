@@ -14,3 +14,4 @@ deploy:
     secure: GCB6CT824nBA2Mw5JiBQ10Pks9Kj7uYVypP5j+LkxKgCpFmkMmuP++rGDkJ2a9/0
   on:
     appveyor_repo_tag: true
+  artifact: ./build_output/artifacts/eVision.eCrypt*.nupkg
