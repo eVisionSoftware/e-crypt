@@ -10,7 +10,7 @@
     <requireLicenseAcceptance>false</requireLicenseAcceptance>
     <description>A cake wrapper for the eVision eCrypt tool that helps to encrypt package into a self-executable file with private key protection</description>
     <releaseNotes></releaseNotes>
-    <copyright>Copyright 2017</copyright>
+    <copyright>Copyright 2018</copyright>
     <tags></tags>
     <dependencies>
     </dependencies>
