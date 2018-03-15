@@ -1,6 +1,6 @@
 Microsoft Visual Studio Solution File, Format Version 12.00
 # Visual Studio 15
-VisualStudioVersion = 15.0.26228.9
+VisualStudioVersion = 15.0.27130.2036
 MinimumVisualStudioVersion = 10.0.40219.1
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "eCrypt.KeyGenerator", "eCrypt.KeyGenerator\eCrypt.KeyGenerator.csproj", "{6ECDEE53-076C-491C-AE04-CE26DBAE65B3}"
 EndProject
@@ -15,8 +15,6 @@ EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "eCrypt.Tests", "eCrypt.Tests\eCrypt.Tests.csproj", "{3EC04540-3D8B-48B4-9850-3224CFD0293E}"
 EndProject
 Project("{D954291E-2A0B-460D-934E-DC6B0785DB48}") = "eCrypt.Common", "eCrypt.Common\eCrypt.Common.shproj", "{4EC9A0AA-5A9A-4D03-A2D9-9F54AB715FFE}"
-EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Cake.eCrypt", "Cake.eCrypt\Cake.eCrypt.csproj", "{BD2B1B7A-9FAC-4E95-9516-71BF4F68F3B7}"
 EndProject
 Global
 	GlobalSection(SharedMSBuildProjectFiles) = preSolution
@@ -57,10 +55,6 @@ Global
 		{3EC04540-3D8B-48B4-9850-3224CFD0293E}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{3EC04540-3D8B-48B4-9850-3224CFD0293E}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{3EC04540-3D8B-48B4-9850-3224CFD0293E}.Release|Any CPU.Build.0 = Release|Any CPU
-		{BD2B1B7A-9FAC-4E95-9516-71BF4F68F3B7}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
-		{BD2B1B7A-9FAC-4E95-9516-71BF4F68F3B7}.Debug|Any CPU.Build.0 = Debug|Any CPU
-		{BD2B1B7A-9FAC-4E95-9516-71BF4F68F3B7}.Release|Any CPU.ActiveCfg = Release|Any CPU
-		{BD2B1B7A-9FAC-4E95-9516-71BF4F68F3B7}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
