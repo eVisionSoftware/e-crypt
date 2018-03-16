@@ -12,17 +12,14 @@ var configuration           = Argument("configuration", "Release");
 
 string buildDir             = Directory("./src/eCrypt/bin") + Directory(configuration);
 string keyGeneratorBuildDir = Directory("./src/eCrypt.KeyGenerator/bin") + Directory(configuration);
-string cakeAddinBuildDir    = Directory("./src/Cake.eCrypt/bin") + Directory(configuration);
 string outputDir            = Directory("./build_output/artifacts");
 string solutionPath         = File("./src/eCrypt.sln");
 
 string keyGeneratorExeName  = "eVision.KeyGenerator.exe";
 string toolExeName          = "eVision.eCrypt.exe";
-string cakeAddinName        = "Cake.eCrypt.dll";
 
 string keyGenArtifactsPath  = Directory(outputDir) + File(keyGeneratorExeName);
 string toolAtrifactsPath    = Directory(outputDir) + File(toolExeName);
-string cakeAddinArtifactsPath    = Directory(outputDir) + File(cakeAddinName);
 
 Task("Clean")
     .Does(() =>
@@ -93,7 +90,6 @@ Task("Merge-Libraries")
      .ToArray();
 
     CopyFile(Directory(buildDir) + File(toolExeName), toolAtrifactsPath);
-    CopyFile(Directory(cakeAddinBuildDir) + File(cakeAddinName), cakeAddinArtifactsPath);
 
     ILRepack(keyGenArtifactsPath, primaryAssembly, GetFiles(assemblyPaths), new ILRepackSettings(){
         Internalize = true,
@@ -119,17 +115,6 @@ Task("Create-Nuget-Packages")
                                   new NuSpecContent {Source = toolAtrifactsPath, Target = nugetTarget }
                                 }
         });
-        
-     NuGetPack(GetFiles("./**/Cake.eCrypt.nuspec"), new NuGetPackSettings {
-            Version           = GitVersion(new GitVersionSettings()).AssemblySemVer,
-            NoPackageAnalysis = true,
-            BasePath          = ".",
-            OutputDirectory   = outputDir,
-            Files             = new [] {
-                                  new NuSpecContent {Source = toolAtrifactsPath, Target = nugetTarget },
-                                  new NuSpecContent {Source = cakeAddinArtifactsPath, Target = nugetTarget }
-                                }
-        });
 });
 
 Task("Push-Nuget-Packages")
@@ -143,10 +128,6 @@ Task("Push-Nuget-Packages")
     };
     
     string package = Directory(outputDir) + File("eVision.eCrypt." + semVersion + ".nupkg");
-    Information("Publishing nuget package " + package);
-    NuGetPush(package, pushSettings);
-    
-    package = Directory(outputDir) + File("Cake.eCrypt." + semVersion + ".nupkg");    
     Information("Publishing nuget package " + package);
     NuGetPush(package, pushSettings);
 });

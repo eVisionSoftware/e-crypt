@@ -15,6 +15,9 @@
     <tags></tags>
     <dependencies>
     </dependencies>
+    <references>
+      <reference file="eVision.eCrypt.exe" />
+    </references>
   </metadata>
   <files>
     <file src="eVision.eCrypt.exe" target="lib\net45" />
